@@ -1,0 +1,23 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test Api Swagger",
+        "description": "API documentation for Returns Service App",
+        "contact": {
+            "email": "adrian.rahmandanu2@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://localhost/api/v1",
+            "description": "API V1"
+        }
+    ],
+    "paths": {
+        "/": {}
+    },
+    "security": [
+        []
+    ]
+}

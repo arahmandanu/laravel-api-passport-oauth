@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user', function (Request $request) {
+Route::get('/testes', function (Request $request) {
     echo $v;
 });

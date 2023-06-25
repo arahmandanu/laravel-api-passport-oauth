@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+//        Rollbar
+        Rollbar\Laravel\RollbarServiceProvider::class,
     ],
 
     /*
@@ -232,4 +234,11 @@ return [
 
     ],
 
+    /*
+    |-------------------------------------------
+    | Current API Version
+    |-------------------------------------------
+    */
+
+    'api_latest'  => '2',
 ];
