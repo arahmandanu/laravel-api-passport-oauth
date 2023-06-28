@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/testes', function (Request $request) {
-    echo $v;
-});
+Route::resources([
+    'user' => \User\ResourceController::class,
+]);

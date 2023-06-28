@@ -1,40 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\Response;
+use App\Http\Resources\Api\ResponsePagination;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-/**
- * @OA\OpenApi(
- *  @OA\Info(
- *      title="Test Api Swagger",
- *      version="1.0.0",
- *      description="API documentation for Returns Service App",
- *      @OA\Contact(
- *          email="adrian.rahmandanu2@gmail.com"
- *      )
- *  ),
- *  @OA\Server(
- *      description="-",
- *      url="https://localhost/api/v1"
- *  ),
- *  @OA\PathItem(
- *      path="/"
- *  )
- * )
- */
-
-class MainController extends Controller
+class ResourceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        return $this->apiResponse(new ResponsePagination(User::paginate(5)), true, 'success get data');
     }
 
     /**

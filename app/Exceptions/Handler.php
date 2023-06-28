@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\Api\ApiExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -37,5 +39,16 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             \Log::debug($e);
         });
+
+        $this->renderable(function(\Exception $exception, $request) {
+            return $this->handleException($request, $exception);
+        });
+    }
+
+    private function handleException($request, $exception)
+    {
+        if ($request->is('api/*')) {
+            return (new ApiExceptionHandler($request, $exception))->call();
+        }
     }
 }
