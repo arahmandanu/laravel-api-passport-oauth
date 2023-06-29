@@ -22,9 +22,10 @@ class ApiExceptionHandler
         $message = self::$exception->getMessage();
         switch (get_class(self::$exception)) {
             case 'Error':
+            case 'Illuminate\Database\QueryException':
             case 'ErrorException':
                 $code = 500;
-                $message = 'Something went Wrong!';
+                $message = "Something went Wrong!, Please contact our developer if error still occurs!.";
                 break;
             case 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException':
                 $code = 404;

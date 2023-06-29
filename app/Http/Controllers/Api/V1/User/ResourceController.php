@@ -17,7 +17,8 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        return $this->apiResponse(new ResponsePagination(User::paginate(5)), true, 'success get data');
+        return $a;
+        return $this->apiResponse(new ResponsePagination(User::paginate()), true, 'success get data');
     }
 
     /**
