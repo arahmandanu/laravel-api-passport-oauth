@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Http\Controllers\Api\ApiExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -47,8 +48,12 @@ class Handler extends ExceptionHandler
 
     private function handleException($request, $exception)
     {
-        if ($request->is('api/*')) {
-            return (new ApiExceptionHandler($request, $exception))->call();
+        if ($request->is('api/*') && $request->wantsJson()) {
+            if (App::environment('local')) {
+                return (new ApiExceptionHandler($request, $exception))->call();
+            }
         }
+
+        return parent::render($request, $exception);
     }
 }

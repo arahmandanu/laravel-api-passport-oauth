@@ -19,6 +19,7 @@ class ApiExceptionHandler
 
     public function call()
     {
+        $data = null;
         $message = self::$exception->getMessage();
         switch (get_class(self::$exception)) {
             case 'Error':
@@ -33,15 +34,19 @@ class ApiExceptionHandler
                     $message = "please make sure you do the request correctly!";
                 }
                 break;
+            case 'Illuminate\Validation\ValidationException':
+                $data = self::$exception->errors();
+                $code = 422;
+                break;
             default:
                 $code = 400;
         }
 
-        return $this->responseHandler($message, $code);
+        return $this->responseHandler($message, $code, $data);
     }
 
-    private function responseHandler(string $message = '', int $code = 400)
+    private function responseHandler(string $message = '', int $code = 400, $data = null)
     {
-        return $this->apiResponse(null, false, $message, $code);
+        return $this->apiResponse($data, false, $message, $code);
     }
 }

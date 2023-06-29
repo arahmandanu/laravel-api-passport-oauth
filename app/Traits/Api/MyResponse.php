@@ -14,18 +14,22 @@ trait MyResponse {
                     'data' => $data->resolve()[0],
                     'paginate' => $data->resolve()[1],
                 ];
-
-                return response()->json($response, $code);
+            } else {
+                $response = [
+                    'code' => $code,
+                    'success'=> $status,
+                    'message' => $message,
+                    'data' => $data,
+                ];
             }
+        } else {
+            $response = [
+                'code' => $code,
+                'success'=> $status,
+                'message' => $message,
+                'errors' => $data,
+            ];
         }
-
-        $response = [
-            'code' => $code,
-            'success'=> $status,
-            'message' => $message,
-            'data' => $data,
-        ];
-
 
         return response()->json($response, $code);
     }

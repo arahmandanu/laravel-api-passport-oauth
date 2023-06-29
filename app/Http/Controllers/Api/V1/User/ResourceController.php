@@ -15,10 +15,9 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $a;
-        return $this->apiResponse(new ResponsePagination(User::paginate()), true, 'success get data');
+        return $this->apiResponse(new ResponsePagination(User::paginate(10)), true, 'success get data');
     }
 
     /**
@@ -46,11 +45,11 @@ class ResourceController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
+        return $this->apiResponse(new Response(User::findOrFail($id)), true, 'success get data');
     }
 
     /**
