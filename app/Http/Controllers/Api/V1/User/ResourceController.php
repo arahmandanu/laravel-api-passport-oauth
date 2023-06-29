@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Response;
 use App\Http\Resources\Api\ResponsePagination;
 use App\Models\User;
+use App\Repositories\User\Find;
+use App\Repositories\User\Where;
 use Illuminate\Http\Request;
 
 class ResourceController extends Controller
@@ -17,7 +19,7 @@ class ResourceController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->apiResponse(new ResponsePagination(User::paginate(10)), true, 'success get data');
+        return $this->apiResponse(new ResponsePagination(new Where($request->input('limit'))), true, 'success get data');
     }
 
     /**
@@ -49,7 +51,7 @@ class ResourceController extends Controller
      */
     public function show($id)
     {
-        return $this->apiResponse(new Response(User::findOrFail($id)), true, 'success get data');
+        return $this->apiResponse(new Response((new Find($id))->call()), true, 'success get data');
     }
 
     /**
