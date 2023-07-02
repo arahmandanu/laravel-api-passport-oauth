@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resources([
-    'user' => \User\ResourceController::class,
-]);
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::resources([
+        'user' => \User\ResourceController::class,
+    ]);
+});
