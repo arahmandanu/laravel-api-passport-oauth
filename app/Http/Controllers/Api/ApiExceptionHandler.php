@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Traits\Api\MyResponse;
@@ -30,7 +31,7 @@ class ApiExceptionHandler
                 break;
             case 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException':
                 $code = 404;
-                if (empty($message)){
+                if (empty($message)) {
                     $message = "please make sure you do the request correctly!";
                 }
                 break;
@@ -47,6 +48,7 @@ class ApiExceptionHandler
 
     private function responseHandler(string $message = '', int $code = 400, $data = null)
     {
+
         return $this->apiResponse($data, false, $message, $code);
     }
 }

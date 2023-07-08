@@ -14,7 +14,8 @@
         "laravel/passport": "^10.4",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.5",
-        "rollbar/rollbar-laravel": "^7.2"
+        "rollbar/rollbar-laravel": "^7.2",
+        "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
