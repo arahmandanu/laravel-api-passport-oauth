@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['valid_api_request']], function () {
 
     Route::group(['prefix' => 'auth'], function () {
-        Route::post('login', [Authentications::class, 'login']);
+        Route::post('personal_access', [Authentications::class, 'personalAccessToken']);
+        Route::post('oauth', [Authentications::class, 'oauth']);
     });
 
     Route::group(['middleware' => 'auth:api'], function () {
