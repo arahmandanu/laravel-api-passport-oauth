@@ -19,7 +19,7 @@ class ResourceController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->apiResponse(new ResponsePagination(new Where($request->input('limit'))), true, 'success get data');
+        return $this->apiResponse(new ResponsePagination((new Where(...$request->input()))->call()), true, 'success get data');
     }
 
     /**

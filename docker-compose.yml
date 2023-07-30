@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+    app:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: belajar_api
+        container_name: belajar_api-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - belajar_api
+
+    db:
+        image: postgres:14.1-alpine
+        container_name: belajar_api-db
+        restart: always
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        networks:
+            - belajar_api
+        ports:
+            - "5432:5432"
+
+    nginx:
+        image: nginx:1.17-alpine
+        container_name: belajar_api-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d
+        networks:
+            belajar_api:
+                aliases:
+                    - api.test
+
+networks:
+    belajar_api:
+        driver: bridge
+
+volumes:
+    db:
+        driver: local

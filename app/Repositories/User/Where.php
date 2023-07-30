@@ -1,20 +1,17 @@
 <?php
+
 namespace App\Repositories\User;
 
 use App\Models\User;
 
-class Where{
-    public string $limit;
-    public string $offset;
-
-    public function __construct(string $limit = '10', string $offset = '0')
+class Where
+{
+    public function __construct(public string $limit = '10', public string $page = '1')
     {
-        $this->limit = $limit;
-        $this->offset = $offset;
     }
 
     public function call()
     {
-        dd($this->limit, $this->offset);
+        return User::paginate($this->limit);
     }
 }

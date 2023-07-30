@@ -32,7 +32,7 @@ class ApiExceptionHandler
             case 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException':
                 $code = 404;
                 if (empty($message)) {
-                    $message = "please make sure you do the request correctly!";
+                    $message = "Resource not Found!";
                 }
                 break;
             case 'Illuminate\Validation\ValidationException':

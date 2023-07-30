@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Repositories\User;
 
 use App\Models\User;
 
-class Find {
+class Find
+{
     private static $id;
     public function __construct($id)
     {

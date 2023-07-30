@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Authentications;
+use App\Http\Controllers\Api\AuthenticationsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['valid_api_request']], function () {
 
     Route::group(['prefix' => 'auth'], function () {
-        Route::post('personal_access', [Authentications::class, 'personalAccessToken']);
-        Route::post('oauth', [Authentications::class, 'oauth']);
+        Route::post('personal_access', [AuthenticationsController::class, 'personalAccessToken'])->name('personal_access_token');
+        Route::post('oauth', [AuthenticationsController::class, 'oauth'])->name('oauth_token');
     });
 
     Route::group(['middleware' => 'auth:api'], function () {
