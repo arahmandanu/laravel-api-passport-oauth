@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\User;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\Response;
 use App\Http\Resources\Api\ResponsePagination;
+use App\Http\Resources\Services\PaginationHelper;
 use App\Models\User;
 use App\Repositories\User\Find;
 use App\Repositories\User\Where;
@@ -19,7 +20,8 @@ class ResourceController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->apiResponse(new ResponsePagination((new Where(...$request->input()))->call()), true, 'success get data');
+        $query = (new PaginationHelper)->FormatQuery($request->input());
+        return $this->apiResponse(new ResponsePagination((new Where(...$query))->call()), true, 'success get data');
     }
 
     /**

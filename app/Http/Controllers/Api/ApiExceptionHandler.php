@@ -26,6 +26,7 @@ class ApiExceptionHandler
             case 'Error':
             case 'Illuminate\Database\QueryException':
             case 'ErrorException':
+                dd($message);
                 $code = 500;
                 $message = "Something went Wrong!, Please contact our developer if error still occurs!.";
                 break;
@@ -39,6 +40,10 @@ class ApiExceptionHandler
                 $data = self::$exception->errors();
                 $code = 422;
                 break;
+            case 'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException':
+                $message = "You don't have access for this request!";
+                $code = 401;
+                break;
             default:
                 $code = 400;
         }
@@ -48,7 +53,6 @@ class ApiExceptionHandler
 
     private function responseHandler(string $message = '', int $code = 400, $data = null)
     {
-
         return $this->apiResponse($data, false, $message, $code);
     }
 }
