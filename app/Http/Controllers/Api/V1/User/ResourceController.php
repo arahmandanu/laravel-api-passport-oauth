@@ -18,8 +18,43 @@ class ResourceController extends AbstractController
      * @OA\Get(
      *     path="/api/v1/user",
      *     tags={"Users"},
-     *      security={{"bearer_token": {}}},
-     *     @OA\Response(response="200", description="Get List User")
+     *     security={{"bearer_token": {}}},
+     *     summary="Get List Users",
+     *     description="Returns list user data",
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         description="Filter by page",
+     *         required=true,
+     *         explode=true,
+     *         @OA\Schema(
+     *             default="0",
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="limit",
+     *         in="query",
+     *         description="Limit Per Page",
+     *         required=true,
+     *         explode=true,
+     *         @OA\Schema(
+     *             default="10",
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="query",
+     *         in="query",
+     *         description="Query by name",
+     *         required=false,
+     *         explode=true,
+     *         @OA\Schema(
+     *             default="",
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Response(response="200", description="List User", @OA\JsonContent())
      * )
      */
     public function index(Request $request)
