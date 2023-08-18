@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 //
 //Route::group(['prefix' => 'auth'], function () {
 //    Route::post('personal_access', [AuthenticationsController::class, 'personalAccessToken'])->name('personal_access_token');

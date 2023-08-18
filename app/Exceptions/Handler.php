@@ -4,8 +4,6 @@ namespace App\Exceptions;
 
 use App\Http\Controllers\Api\ApiExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Throwable;
 
 class Handler extends ExceptionHandler

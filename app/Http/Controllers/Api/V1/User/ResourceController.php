@@ -21,45 +21,53 @@ class ResourceController extends AbstractController
      *     security={{"bearer_token": {}}},
      *     summary="Get List Users",
      *     description="Returns list user data",
+     *
      *     @OA\Parameter(
      *         name="page",
      *         in="query",
      *         description="Filter by page",
      *         required=true,
      *         explode=true,
+     *
      *         @OA\Schema(
      *             default="0",
      *             type="integer",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="limit",
      *         in="query",
      *         description="Limit Per Page",
      *         required=true,
      *         explode=true,
+     *
      *         @OA\Schema(
      *             default="10",
      *             type="integer",
      *         )
      *     ),
+     *
      *     @OA\Parameter(
      *         name="query",
      *         in="query",
      *         description="Query by name",
      *         required=false,
      *         explode=true,
+     *
      *         @OA\Schema(
      *             default="",
      *             type="string",
      *         )
      *     ),
+     *
      *     @OA\Response(response="200", description="List User", @OA\JsonContent())
      * )
      */
     public function index(Request $request)
     {
         $query = (new PaginationHelper)->FormatQuery($request->input());
+
         return $this->apiResponse(new ResponsePagination((new Where(...$query))->call()), true, 'success get data');
     }
 
@@ -76,14 +84,12 @@ class ResourceController extends AbstractController
     /**
      * Store a newly created resources in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
     }
-
 
     /**
      * @OA\Get(
@@ -92,14 +98,18 @@ class ResourceController extends AbstractController
      *     security={{"bearer_token": {}}},
      *      summary="Get Detail User",
      *      description="Returns user data",
+     *
      *      @OA\Parameter(
      *          name="id",
      *          description="user id",
      *          required=true,
      *          in="path",
+     *
      *          @OA\Schema(type="string"),
+     *
      *          @OA\Examples(example="uuid", value="0006faf6-7a61-426c-9034-579f2cfcfa83", summary="An UUID value."),
      *      ),
+     *
      *     @OA\Response(response="200", description="Detail User", @OA\JsonContent())
      * )
      */
@@ -128,7 +138,6 @@ class ResourceController extends AbstractController
     /**
      * Update the specified resources in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

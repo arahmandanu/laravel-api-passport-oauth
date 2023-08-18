@@ -35,7 +35,7 @@ class LoginPostRequest extends FormRequest
     public function messages()
     {
         return [
-            'grant_type.in' => 'Grant type not valid!'
+            'grant_type.in' => 'Grant type not valid!',
         ];
     }
 }

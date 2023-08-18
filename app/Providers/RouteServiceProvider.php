@@ -28,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     // protected $namespace = 'App\\Http\\Controllers';
 
-    /** @var string $apiNamespace */
+    /** @var string */
     protected $apiNamespace = 'App\Http\Controllers\Api';
 
     /**
@@ -77,18 +77,18 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => ['api', 'api_version:V1', 'valid_api_request'],
-            'namespace'  => "{$this->apiNamespace}\V1",
-            'prefix'     => 'api/v1',
+            'namespace' => "{$this->apiNamespace}\V1",
+            'prefix' => 'api/v1',
         ], function ($router) {
             require base_path('routes/api/v1.php');
         });
 
-//        Route::group([
-//            'middleware' => ['api', 'api_version:v2'],
-//            'namespace'  => "{$this->apiNamespace}\V1",
-//            'prefix'     => 'api/v2',
-//        ], function ($router) {
-//            require base_path('routes/api/v2.php');
-//        });
+        //        Route::group([
+        //            'middleware' => ['api', 'api_version:v2'],
+        //            'namespace'  => "{$this->apiNamespace}\V1",
+        //            'prefix'     => 'api/v2',
+        //        ], function ($router) {
+        //            require base_path('routes/api/v2.php');
+        //        });
     }
 }

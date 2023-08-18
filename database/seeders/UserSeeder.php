@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             ['id' => Str::uuid(), 'name' => 'Adrian Rahmandanu', 'password' => bcrypt('123456')]
         );
 
-        if (!$user->hasRole('admin')) {
+        if (! $user->hasRole('admin')) {
             $user->assignRole('admin');
         }
     }

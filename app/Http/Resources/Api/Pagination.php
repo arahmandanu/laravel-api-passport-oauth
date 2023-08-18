@@ -20,7 +20,7 @@ class Pagination extends JsonResource
             'per_page' => $this->perPage(),
             'current_page' => $this->currentPage(),
             'total_pages' => $this->lastPage(),
-            'has_more_page' => $this->hasMorePages()
+            'has_more_page' => $this->hasMorePages(),
         ];
     }
 }

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Traits\Api\MyResponse;
-use ErrorException;
 use Illuminate\Http\Request;
-
 
 class ApiExceptionHandler
 {
     use MyResponse;
+
     private static $exception;
+
     private static $request;
 
     public function __construct(Request $request, \Exception $exception)
@@ -28,12 +28,12 @@ class ApiExceptionHandler
             case 'Illuminate\Database\QueryException':
             case 'ErrorException':
                 $code = 500;
-                $message = "Something went Wrong!, Please contact our developer if error still occurs!.";
+                $message = 'Something went Wrong!, Please contact our developer if error still occurs!.';
                 break;
             case 'Illuminate\Database\Eloquent\ModelNotFoundException':
             case 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException':
                 $code = 404;
-                $message = "Resource not Found!";
+                $message = 'Resource not Found!';
                 break;
             case 'Illuminate\Validation\ValidationException':
                 $data = self::$exception->errors();
