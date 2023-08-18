@@ -1,21 +1,87 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Test Api Swagger",
-        "description": "API documentation for Returns Service App",
+        "title": "Beljar",
+        "description": "Ya Belahjar",
         "contact": {
             "email": "adrian.rahmandanu2@gmail.com"
         },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "https://localhost/api/v1",
-            "description": "API V1"
-        }
-    ],
     "paths": {
-        "/": {}
+        "/api/v1/user": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "ad790dea18a50ef39e12505cb4856bd2",
+                "responses": {
+                    "200": {
+                        "description": "Get List User"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/user/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get Detail User",
+                "description": "Returns user data",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "uuid": {
+                                "summary": "An UUID value.",
+                                "value": "0006faf6-7a61-426c-9034-579f2cfcfa83"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail User",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
     },
     "security": [
         []

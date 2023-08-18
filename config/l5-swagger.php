@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'default' => 'v1',
+    'default' => 'default',
     'documentations' => [
-        'v1' => [
+        'default' => [
             'api' => [
-                'title' => 'V1',
+                'title' => env('APP_NAME', 'belajar'),
             ],
 
             'routes' => [
@@ -23,12 +23,12 @@ return [
                 /*
                  * File name of the generated json documentation file
                 */
-                'docs_json' => 'api-docs-v1.json',
+                'docs_json' => 'api-docs.json',
 
                 /*
                  * File name of the generated YAML documentation file
                 */
-                'docs_yaml' => 'api-docs-v1.yaml',
+                'docs_yaml' => 'api-docs.yaml',
 
                 /*
                 * Set this to `json` or `yaml` to determine which documentation file to use in UI
@@ -39,13 +39,13 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('app')."/Http/Controllers/Api/v1",
+                    base_path('app/Http/Controllers/Api/V1'),
                 ],
 
             ],
         ],
     ],
-    'v1' => [
+    'defaults' => [
         'routes' => [
             /*
              * Route for accessing parsed swagger annotations.
@@ -192,6 +192,12 @@ return [
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
                 */
+                'bearer_token' => [ // Unique name of security
+                    'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Enter token in format (Bearer <token>)',
+                    'name' => 'Authorization', // The name of the header or query parameter to be used.
+                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
+                ],
             ],
             'security' => [
                 /*

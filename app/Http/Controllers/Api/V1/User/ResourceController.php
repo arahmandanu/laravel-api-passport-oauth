@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1\User;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\V1\AbstractController;
+use App\Http\Requests\Api\V1\Users\UserShowRequest;
 use App\Http\Resources\Api\Response;
 use App\Http\Resources\Api\ResponsePagination;
 use App\Http\Resources\Services\PaginationHelper;
@@ -11,12 +12,15 @@ use App\Repositories\User\Find;
 use App\Repositories\User\Where;
 use Illuminate\Http\Request;
 
-class ResourceController extends Controller
+class ResourceController extends AbstractController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * @OA\Get(
+     *     path="/api/v1/user",
+     *     tags={"Users"},
+     *      security={{"bearer_token": {}}},
+     *     @OA\Response(response="200", description="Get List User")
+     * )
      */
     public function index(Request $request)
     {
@@ -25,7 +29,7 @@ class ResourceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resources.
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +39,7 @@ class ResourceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resources in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -45,19 +49,38 @@ class ResourceController extends Controller
         //
     }
 
+
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/v1/user/{id}",
+     *     tags={"Users"},
+     *     security={{"bearer_token": {}}},
+     *      summary="Get Detail User",
+     *      description="Returns user data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="user id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(type="string"),
+     *          @OA\Examples(example="uuid", value="0006faf6-7a61-426c-9034-579f2cfcfa83", summary="An UUID value."),
+     *      ),
+     *     @OA\Response(response="200", description="Detail User", @OA\JsonContent())
+     * )
+     */
+    /**
+     * Display the specified resources.
      *
-     * @param  int  $id
+     * @param  string  $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(UserShowRequest $request, $user)
     {
-        return $this->apiResponse(new Response((new Find($id))->call()), true, 'success get data');
+        return $this->apiResponse(new Response((new Find($user))->call()), true, 'success get data');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resources.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -68,7 +91,7 @@ class ResourceController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resources in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -80,7 +103,7 @@ class ResourceController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resources from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

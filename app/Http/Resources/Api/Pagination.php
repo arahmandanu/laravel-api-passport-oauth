@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class Pagination extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resources into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable

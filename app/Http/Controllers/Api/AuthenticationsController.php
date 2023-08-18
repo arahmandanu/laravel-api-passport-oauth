@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Auth\LoginPostRequest;
+use App\Http\Requests\Api\Auth\RefreshTokenPostRequest;
+use App\Http\Requests\Api\Auth\SignOutPostRequest;
 use App\Http\Resources\Api\Response;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Spatie\Permission\Models\Role;
-
 class AuthenticationsController extends Controller
 {
     public function personalAccessToken(LoginPostRequest $request)
@@ -26,9 +27,40 @@ class AuthenticationsController extends Controller
             ]), true, 'success', 200);
         }
 
-        return $this->apiResponse(null, false, 'User account invalid!', 200);
+        return $this->apiResponse(null, false, 'User account invalid!', 404);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/greet",
+     *     tags={"greeting"},
+     *     summary="Returns a Sample API response",
+     *     description="A sample greeting to test out the API",
+     *     operationId="greet",
+     *     @OA\Parameter(
+     *          name="firstname",
+     *          description="nama depan",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          name="lastname",
+     *          description="nama belakang",
+     *          required=true,
+     *          in="query",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response="default",
+     *         description="successful operation"
+     *     )
+     * )
+     */
     public function oauth(LoginPostRequest $request)
     {
         if (!Auth::attempt(['email' => $request->validated()['username'], 'password' => $request->validated()['password']])) {
@@ -41,7 +73,28 @@ class AuthenticationsController extends Controller
 
         $attr = array_merge($request->validated(), ['scope' => auth()->user()->getRoleNames()->toArray()]);
         $response = Http::post(env('APP_URL', 'http://localhost:8000') . '/oauth/token', $attr);
-
         return $response->json();
+    }
+
+    public function oauthRefreshToken(RefreshTokenPostRequest $request)
+    {
+        $attr = array_merge($request->validated(), ['scope' => '']);
+        $response = Http::post(env('APP_URL', 'http://localhost:8000') . '/oauth/token', $attr);
+        return $response->json();
+    }
+
+    public function oauthSignOut(SignOutPostRequest $request)
+    {
+        $tokenId = auth()->user()->token()->id;
+        if (empty($tokenId)){
+            return $this->apiResponse(null, false, 'Token not Found!', 404);
+        }
+
+            auth()->user()->token()->revoke();
+            $refreshTokenRepository = app('Laravel\Passport\RefreshTokenRepository');
+            $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($tokenId);
+            return $this->apiResponse(new Response([
+                'Token has been reoved!'
+            ]), true, 'Success!');
     }
 }

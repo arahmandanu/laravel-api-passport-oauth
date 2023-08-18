@@ -1,21 +1,29 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Test Api Swagger",
-        "description": "API documentation for Returns Service App",
-        "contact": {
-            "email": "adrian.rahmandanu2@gmail.com"
-        },
+        "title": "L5 OpenApi",
+        "description": "L5 Swagger OpenApi description",
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "https://localhost/api/v1",
-            "description": "API V1"
-        }
-    ],
     "paths": {
-        "/": {}
+        "/api/v1/user": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "operationId": "ad790dea18a50ef39e12505cb4856bd2",
+                "responses": {
+                    "200": {
+                        "description": "Get List User"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        }
     },
     "security": [
         []
