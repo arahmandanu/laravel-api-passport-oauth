@@ -64,6 +64,14 @@
                                 "schema": {}
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Failed Validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -122,6 +130,14 @@
                                 "schema": {}
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Failed Validation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -158,6 +174,14 @@
                 "responses": {
                     "200": {
                         "description": "Detail User",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failed Validation",
                         "content": {
                             "application/json": {
                                 "schema": {}

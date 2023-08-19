@@ -62,7 +62,8 @@ class ResourceController extends AbstractController
      *         )
      *     ),
      *
-     *     @OA\Response(response="200", description="List User", @OA\JsonContent())
+     *     @OA\Response(response="200", description="List User", @OA\JsonContent()),
+     *     @OA\Response(response="422", description="Failed Validation", @OA\JsonContent())
      * )
      */
     public function index(Request $request)
@@ -116,12 +117,8 @@ class ResourceController extends AbstractController
      *         )
      *     ),
      *
-     *     @OA\Response(
-     *         response=200,
-     *         description="OK",
-     *
-     *         @OA\JsonContent()
-     *     )
+     *     @OA\Response(response=200, description="OK", @OA\JsonContent()),
+     *     @OA\Response(response=422, description="Failed Validation", @OA\JsonContent())
      * )
      */
     /**
@@ -154,7 +151,8 @@ class ResourceController extends AbstractController
      *          @OA\Examples(example="uuid", value="0006faf6-7a61-426c-9034-579f2cfcfa83", summary="An UUID value."),
      *      ),
      *
-     *     @OA\Response(response="200", description="Detail User", @OA\JsonContent())
+     *     @OA\Response(response="200", description="Detail User", @OA\JsonContent()),
+     *     @OA\Response(response="422", description="Failed Validation", @OA\JsonContent())
      * )
      */
     /**
