@@ -15,6 +15,6 @@ class Find
 
     public function call()
     {
-        return User::findOrFail(self::$id);
+        return User::with('roles')->findOrFail(self::$id);
     }
 }

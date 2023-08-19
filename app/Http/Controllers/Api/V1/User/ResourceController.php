@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Api\V1\AbstractController;
+use App\Http\Requests\Api\V1\Users\UserCreateRequest;
 use App\Http\Requests\Api\V1\Users\UserShowRequest;
 use App\Http\Resources\Api\Response;
 use App\Http\Resources\Api\ResponsePagination;
 use App\Http\Resources\Services\PaginationHelper;
-use App\Models\User;
+use App\Repositories\User\Create;
 use App\Repositories\User\Find;
 use App\Repositories\User\Where;
 use Illuminate\Http\Request;
@@ -71,24 +72,67 @@ class ResourceController extends AbstractController
         return $this->apiResponse(new ResponsePagination((new Where(...$query))->call()), true, 'success get data');
     }
 
-    /**
-     * Show the form for creating a new resources.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
     /**
-     * Store a newly created resources in storage.
+     * @OA\Post(
+     *     path="/api/v1/user",
+     *     tags={"Users"},
+     *     security={{"bearer_token": {}}},
+     *     summary="Adds a new user - with oneOf examples",
      *
-     * @return \Illuminate\Http\Response
+     *     @OA\RequestBody(
+     *
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *
+     *             @OA\Schema(
+     *
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string"
+     *                 ),
+     * *                 @OA\Property(
+     *                     property="password_confirmation",
+     *                     type="string"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="role",
+     *                     enum={"admin", "staff", "reguler"}
+     *                 ),
+     *                 example={"name": "Missutsan", "email": "xxx@mail.com", "password": "12345678", "password_confirmation": "12345678", "role": "xxx"}
+     *             )
+     *         )
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
-    public function store(Request $request)
+    /**
+     * Display the specified resources.
+     *
+     * @param  string  $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(UserCreateRequest $request)
     {
-        //
+        return $this->apiResponse(new Response((new Create(...$request->except('password_confirmation')))->call()), true, 'success create new User');
     }
 
     /**

@@ -29,42 +29,6 @@ class AuthenticationsController extends Controller
         return $this->apiResponse(null, false, 'User account invalid!', 404);
     }
 
-    /**
-     * @OA\Get(
-     *     path="/greet",
-     *     tags={"greeting"},
-     *     summary="Returns a Sample API response",
-     *     description="A sample greeting to test out the API",
-     *     operationId="greet",
-     *
-     *     @OA\Parameter(
-     *          name="firstname",
-     *          description="nama depan",
-     *          required=true,
-     *          in="query",
-     *
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *
-     *     @OA\Parameter(
-     *          name="lastname",
-     *          description="nama belakang",
-     *          required=true,
-     *          in="query",
-     *
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *     ),
-     *
-     *     @OA\Response(
-     *         response="default",
-     *         description="successful operation"
-     *     )
-     * )
-     */
     public function oauth(LoginPostRequest $request)
     {
         if (! Auth::attempt(['email' => $request->validated()['username'], 'password' => $request->validated()['password']])) {
