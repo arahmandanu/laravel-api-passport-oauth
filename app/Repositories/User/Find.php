@@ -3,8 +3,9 @@
 namespace App\Repositories\User;
 
 use App\Models\User;
+use App\Repositories\AbstractRepositories;
 
-class Find
+class Find extends AbstractRepositories
 {
     private static $id;
 

@@ -3,8 +3,9 @@
 namespace App\Repositories\User;
 
 use App\Models\User;
+use App\Repositories\AbstractRepositories;
 
-class Where
+class Where extends AbstractRepositories
 {
     public function __construct(public ?string $query = '', public ?string $limit = '10', public ?string $page = '1')
     {

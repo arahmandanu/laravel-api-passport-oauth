@@ -39,7 +39,7 @@ return [
                  * Absolute paths to directory containing the swagger annotations are stored.
                 */
                 'annotations' => [
-                    base_path('app/Http/Controllers/Api/V1'),
+                    base_path('routes/api/v1'),
                 ],
 
             ],
@@ -211,8 +211,7 @@ return [
                     ],
 
                     'passport' => []
-                    */
-                ],
+                    */],
             ],
         ],
 

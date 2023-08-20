@@ -31,16 +31,16 @@ class AuthenticationsController extends Controller
 
     public function oauth(LoginPostRequest $request)
     {
-        if (! Auth::attempt(['email' => $request->validated()['username'], 'password' => $request->validated()['password']])) {
+        if (!Auth::attempt(['email' => $request->validated()['username'], 'password' => $request->validated()['password']])) {
             return $this->apiResponse(null, false, 'User account Not Found!', 404);
         }
 
-        if (! auth()->user()->hasAnyRole(Role::all())) {
+        if (!auth()->user()->hasAnyRole(Role::all())) {
             return $this->apiResponse(null, false, 'You do not have permission to acces this page!', 403);
         }
 
         $attr = array_merge($request->validated(), ['scope' => auth()->user()->getRoleNames()->toArray()]);
-        $response = Http::post(env('APP_URL', 'http://localhost:8000').'/oauth/token', $attr);
+        $response = Http::post(env('APP_URL', 'http://localhost:8000') . '/oauth/token', $attr);
 
         return $response->json();
     }
@@ -48,7 +48,7 @@ class AuthenticationsController extends Controller
     public function oauthRefreshToken(RefreshTokenPostRequest $request)
     {
         $attr = array_merge($request->validated(), ['scope' => '']);
-        $response = Http::post(env('APP_URL', 'http://localhost:8000').'/oauth/token', $attr);
+        $response = Http::post(env('APP_URL', 'http://localhost:8000') . '/oauth/token', $attr);
 
         return $response->json();
     }

@@ -13,6 +13,38 @@ services:
         networks:
             - belajar_api
 
+    app_queue:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: belajar_api
+        container_name: belajar_api-app-queue
+        restart: always
+        command: php artisan queue:work
+        depends_on:
+            - app
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - belajar_api
+
+    app_cron:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: belajar_api
+        container_name: belajar_api-app-cron
+        restart: always
+        command: php artisan schedule:work
+        depends_on:
+            - app
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - belajar_api
+
     db:
         image: postgres:14.1-alpine
         container_name: belajar_api-db
