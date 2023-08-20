@@ -46,7 +46,7 @@ class Handler extends ExceptionHandler
 
     private function handleException($request, $exception)
     {
-        if ($request->is('api/*') && $request->wantsJson()) {
+        if ($request->is('api/*')) {
             return (new ApiExceptionHandler($request, $exception))->call();
         }
     }
