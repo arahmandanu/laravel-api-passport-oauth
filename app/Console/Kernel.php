@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         $schedule->call(function () {
-            echo 'berhasil run schedul';
+            echo 'berhasil run schedule';
         })->everyMinute();
     }
 
