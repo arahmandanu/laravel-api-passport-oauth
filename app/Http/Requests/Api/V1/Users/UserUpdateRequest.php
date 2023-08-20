@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'user' => ['required', 'uuid'],
             'email' => ['required', 'email', "unique:App\Models\User,email"],
-            'name' => ['required']
+            'name' => ['required'],
         ];
     }
 

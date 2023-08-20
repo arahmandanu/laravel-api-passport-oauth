@@ -13,7 +13,6 @@ Route::group(['prefix' => 'auth'], function () {
         ->name('oauth_sign_out');
 });
 
-
 /**
  * @OA\Post(
  *     path="/api/v1/auth/oauth",

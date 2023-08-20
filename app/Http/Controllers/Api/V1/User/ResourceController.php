@@ -34,7 +34,6 @@ class ResourceController extends AbstractController
         return $this->apiResponse(new Response((new Create(...$request->except('password_confirmation')))->call()), true, 'success create new User');
     }
 
-
     /**
      * Display the specified resources.
      *

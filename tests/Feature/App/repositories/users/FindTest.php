@@ -2,7 +2,6 @@
 
 namespace Tests\App\Repositories\Users;
 
-use App\Models\User;
 use Tests\TestCase;
 
 class FindTest extends TestCase

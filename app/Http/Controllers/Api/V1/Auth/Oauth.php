@@ -1,3 +1,3 @@
 <?php
 
-include __DIR__ . '../../Api/AuthenticationsController.php';
+include __DIR__.'../../Api/AuthenticationsController.php';
