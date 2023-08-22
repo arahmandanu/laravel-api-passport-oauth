@@ -171,3 +171,27 @@ Route::group(['middleware' => ['auth:api', 'scope:admin,agent']], function () {
  *     @OA\Response(response="422", description="Failed Validation", @OA\JsonContent())
  * )
  */
+
+/**
+ * @OA\Delete(
+ *     path="/api/v1/user/{id}",
+ *     tags={"Users"},
+ *     security={{"bearer_token": {}}},
+ *      summary="Delete User",
+ *      description="Returns Success message delete",
+ *
+ *      @OA\Parameter(
+ *          name="id",
+ *          description="user id",
+ *          required=true,
+ *          in="path",
+ *
+ *          @OA\Schema(type="string"),
+ *
+ *          @OA\Examples(example="uuid", value="0006faf6-7a61-426c-9034-579f2cfcfa83", summary="An UUID value."),
+ *      ),
+ *
+ *     @OA\Response(response="200", description="Detail User", @OA\JsonContent()),
+ *     @OA\Response(response="422", description="Failed Validation", @OA\JsonContent())
+ * )
+ */
