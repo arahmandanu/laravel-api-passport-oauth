@@ -45,18 +45,36 @@ services:
         networks:
             - belajar_api
 
-    db:
-        image: postgres:14.1-alpine
-        container_name: belajar_api-db
+    # db:
+    #     image: postgres:14.1-alpine
+    #     container_name: belajar_api-db
+    #     restart: always
+    #     environment:
+    #         POSTGRES_DB: ${DB_DATABASE}
+    #         POSTGRES_USER: ${DB_USERNAME}
+    #         POSTGRES_PASSWORD: ${DB_PASSWORD}
+    #     networks:
+    #         - belajar_api
+    #     ports:
+    #         - "5432:5432"
+
+    db_mysql:
+        image: mysql:latest
+        container_name: belajar_api-db-mysql
         restart: always
-        environment:
-            POSTGRES_DB: ${DB_DATABASE}
-            POSTGRES_USER: ${DB_USERNAME}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
         networks:
             - belajar_api
         ports:
-            - "5432:5432"
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
 
     nginx:
         image: nginx:1.17-alpine

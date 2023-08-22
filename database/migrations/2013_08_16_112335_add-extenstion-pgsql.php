@@ -11,7 +11,9 @@ class AddExtenstionPgsql extends Migration
      */
     public function up()
     {
-        DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
+        if (env('DB_CONNECTION') === 'pgsql') {
+            DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
+        }
     }
 
     /**
@@ -21,6 +23,8 @@ class AddExtenstionPgsql extends Migration
      */
     public function down()
     {
-        DB::statement('DROP EXTENSION IF EXISTS "uuid-ossp";');
+        if (env('DB_CONNECTION') === 'pgsql') {
+            DB::statement('DROP EXTENSION IF EXISTS "uuid-ossp";');
+        }
     }
 }
