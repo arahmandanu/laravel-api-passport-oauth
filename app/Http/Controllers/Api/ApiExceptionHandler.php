@@ -23,6 +23,7 @@ class ApiExceptionHandler
     {
         $data = null;
         $message = self::$exception->getMessage();
+
         switch (get_class(self::$exception)) {
             case 'Error':
             case 'Illuminate\Database\QueryException':
@@ -42,8 +43,10 @@ class ApiExceptionHandler
                 $message = "You don't have access for this request!";
                 $code = 401;
                 break;
-            default:
+            case "Symfony\Component\HttpKernel\Exception\HttpException":
                 $code = self::$exception->getStatusCode();
+            default:
+                $code = 400;
         }
 
         return $this->responseHandler($message, $code, $data);

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Resources\Services;
+namespace App\Traits;
 
-class PaginationHelper
+trait PaginationHelper
 {
     public function FormatQuery($request): array
     {

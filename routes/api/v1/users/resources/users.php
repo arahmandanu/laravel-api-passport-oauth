@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['auth:api', 'scope:admin,agent']], function () {
+Route::group(['middleware' => ['auth:api', 'scope:admin,staff,reguler']], function () {
     Route::resources([
         'user' => \User\ResourceController::class,
     ]);

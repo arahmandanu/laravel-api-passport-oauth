@@ -9,7 +9,6 @@ use App\Http\Requests\Api\V1\Users\UserShowRequest;
 use App\Http\Requests\Api\V1\Users\UserUpdateRequest;
 use App\Http\Resources\Api\Response;
 use App\Http\Resources\Api\ResponsePagination;
-use App\Http\Resources\Services\PaginationHelper;
 use App\Repositories\User\Create;
 use App\Repositories\User\Destroy;
 use App\Repositories\User\Find;
@@ -21,8 +20,7 @@ class ResourceController extends AbstractController
 {
     public function index(Request $request)
     {
-        $query = (new PaginationHelper)->FormatQuery($request->input());
-
+        $query = $this->FormatQuery($request->input());
         return $this->apiResponse(new ResponsePagination((new Where(...$query))->call()), true, 'success get list data');
     }
 
