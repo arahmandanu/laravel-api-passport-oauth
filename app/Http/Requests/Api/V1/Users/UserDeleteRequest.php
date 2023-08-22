@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests\Api\V1\Users;
 
-use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 
-class UserUpdateRequest extends FormRequest
+class UserDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,8 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $roles = Role::all()->pluck('name');
-
         return [
             'user' => ['required', 'uuid'],
-            'email' => ['required', 'email', "unique:App\Models\User,email," . Route::input('user') . ''],
-            'name' => ['required'],
-            'role' => ['in:' . implode(',', $roles->toArray())],
         ];
     }
 

@@ -14,6 +14,7 @@ class Role extends SpatieRole
      * @var array
      */
     protected $hidden = [
+        'id',
         'pivot',
         'guard_name',
     ];

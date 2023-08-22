@@ -28,7 +28,6 @@ class ApiExceptionHandler
             case 'Illuminate\Database\QueryException':
             case 'ErrorException':
                 $code = 500;
-                // $message = 'Something went Wrong!, Please contact our developer if error still occurs!.';
                 break;
             case 'Illuminate\Database\Eloquent\ModelNotFoundException':
             case 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException':
@@ -44,7 +43,7 @@ class ApiExceptionHandler
                 $code = 401;
                 break;
             default:
-                $code = 400;
+                $code = self::$exception->getStatusCode();
         }
 
         return $this->responseHandler($message, $code, $data);

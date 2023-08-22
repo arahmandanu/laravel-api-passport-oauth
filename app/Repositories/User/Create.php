@@ -27,7 +27,7 @@ class Create extends AbstractRepositories
         if ($newUser->save()) {
             $newUser->assignRole($this->role);
 
-            return $newUser;
+            return $newUser->refresh();
         } else {
             return $this->raise422(['failed to create new User']);
         }

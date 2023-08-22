@@ -105,6 +105,50 @@ Route::group(['middleware' => ['auth:api', 'scope:admin,agent']], function () {
  */
 
 /**
+ * @OA\Put(
+ *     path="/api/v1/user",
+ *     tags={"Users"},
+ *     security={{"bearer_token": {}}},
+ *     summary="Adds a new user - with oneOf examples",
+ *
+ *     @OA\RequestBody(
+ *
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *
+ *             @OA\Schema(
+ *
+ *                 @OA\Property(
+ *                     property="name",
+ *                     type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="email",
+ *                     type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="password",
+ *                     type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="password_confirmation",
+ *                     type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="role",
+ *                     enum={"admin", "staff", "reguler"}
+ *                 ),
+ *                 example={"name": "Missutsan", "email": "xxx@mail.com", "password": "12345678", "password_confirmation": "12345678", "role": "xxx"}
+ *             )
+ *         )
+ *     ),
+ *
+ *     @OA\Response(response=200, description="OK", @OA\JsonContent()),
+ *     @OA\Response(response=422, description="Failed Validation", @OA\JsonContent())
+ * )
+ */
+
+/**
  * @OA\Get(
  *     path="/api/v1/user/{id}",
  *     tags={"Users"},
