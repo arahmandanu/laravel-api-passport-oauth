@@ -9,13 +9,16 @@ class Find extends AbstractRepositories
 {
     private static $id;
 
-    public function __construct($id)
+    public function __construct($id, public bool $withRole = false)
     {
         self::$id = $id;
     }
 
     public function call()
     {
-        return User::with('roles')->findOrFail(self::$id);
+        return User::when($this->withRole, function ($query, $withRole) {
+            $query->with('roles');
+        })
+            ->findOrFail(self::$id);
     }
 }
